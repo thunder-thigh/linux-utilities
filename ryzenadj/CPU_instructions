@@ -1,0 +1,23 @@
+I am using ryzenadj for adjusting CPU Wattage. There is no undervolting/curvesetting, just limiting the max usable wattage. 
+The two scripts Adjust_CPU_Wattage.sh (keybind to Super+P)
+and Apply_last_CPU_Wattage.sh (runs as login)
+
+both scripts need root permission to run. But in practice, prompting the user for password each time is very retarded. That is why, a polkit rule has been added for these two scripts ONLY.
+The polkit rule can be located in the file: /etc/polkit-1/rules.d/90-ryzen-power.rules 
+This file has rules added so that user "aashu" can execute both commands without asking for password.
+BUT, to execute these, both scripts need to be run with "pkexec" appended at the start of the scripts.
+
+The keybind for changing the CPU Wattage is:
+Super+P = "pkexec /mnt/ENJOY_VOLUME/Customization/Scripts/Adjust_CPU_Wattage.sh"
+and the entry for the command to run ar boot is also : "pkexec /mnt/ENJOY_VOLUME/Customization/Scripts/Apply_last_CPU_Wattage.sh"
+
+To move these both scripts you will have to edit all of these. 
+
+NOTES:
+sudoers file has not been edited for this.
+the NOPASSWD: /path/to/script was tried and failed to do a clean job, aka, very hacky and messy solution that ends up in breaking sudo for EVERY other command.
+The ryzenadj binary was obtained from UTUUNIX or something like that, like x86UniversalTuningUtilityForUnix's tarball. I extracted it and found the the binary for ryzenadj in the dependecies build folder. So it is what it is.
+
+A copy of the ryzenadj binary is also stored at /mnt/Customization/Apps_Installed/executables/ryzenadj
+
+THANK YOU
